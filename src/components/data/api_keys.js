@@ -1,0 +1,1 @@
+export const API_KEY_FLICKR = '01cbe48fd0f528a0b41ce7dcecbe06cf';
