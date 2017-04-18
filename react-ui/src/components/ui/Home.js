@@ -1,5 +1,5 @@
 import {NavbarMenu} from './NavbarMenu';
-let bg_image = require('/../images/bgImage.png');
+import bg_image from '../images/bgImage.png';
 const style = {
     backgroundImage: "url(" + bg_image + ")",
     backgroundRepeat: 'no-repeat',
