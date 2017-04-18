@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node server",
-    "heroku-postbuild": "cd react-ui/ && npm install --only=dev && npm install && node_modules/.bin/webpack"
+    "heroku-postbuild": "cd react-ui/ && npm install && npm install && node_modules/.bin/webpack"
   },
   "cacheDirectories": [
     "node_modules",
