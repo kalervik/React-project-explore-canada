@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import Autocomplete from 'react-google-autocomplete';
-import { GooglePlaces } from 'react-google-places-component';
 export class SearchLocation extends Component{
     constructor(props){
         super(props);
