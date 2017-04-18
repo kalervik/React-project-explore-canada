@@ -1,7 +1,6 @@
-import {NavbarMenu} from './NavbarMenu';
-import bg_image from '../images/bgImage.png';
+import { NavbarMenu } from './NavbarMenu';
 const style = {
-    backgroundImage: "url(" + bg_image + ")",
+    backgroundImage: "url(" + require('../images/BgImage.png') +")",
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     opacity: 0.9,
