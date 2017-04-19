@@ -1,30 +1,61 @@
 import { Component } from 'react';
-import Autocomplete from 'react-google-autocomplete';
+import Map from './Map';
+import Places from './Places';
+import superagent from 'superagent';
 export class SearchLocation extends Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
+        this.state ={
+            venues: [],
+            currentLocation: {
+                lat : 43.6414378,
+                lng: -79.391541
+            }
+        }
+        this.successGettingLocation = this.successGettingLocation.bind(this);
     }
-
-    render (){
+    componentDidMount() {
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition( this.successGettingLocation);
+        }
+        const latLang = "ll=" + this.state.currentLocation.lat + "," + this.state.currentLocation.lng;
+        const url = "https://api.foursquare.com/v2/venues/search?v=20170406&"+ latLang + "&client_id=33ZXNT53ZBLRRMIIC1XG3GEYXFZ2MUK2HZRHDGUSGIOLY2MF&client_secret=CR5AQE0BTM3NRGDSQAY0OEEEGUT1EM1ZW5PQURRTC5XBIIVH";
+        superagent
+            .get(url)
+            .query(null)
+            .set('Accept', 'text/json')
+            .end((error, response) => {
+                const venues = response.body.response.venues;
+                this.setState({
+                    venues: venues
+                })
+            });
+    }
+    successGettingLocation(location){
+        this.setState({
+            currentLocation : {
+                lat: location.coords.latitude,
+                lng: location.coords.longitude
+            }
+        });
+    }
+    render () {
         return (
-             <div className = "row margin-top">
-                 <div className="container">
-                    <h3>Welcome to search places. Here you can search places near your location.</h3>
+            <div className="row margin-top">
+                <div className="container-fluid">
+                    <div className="col-md-6" style={{height:window.innerHeight}}>
+                        <Map center ={this.state.currentLocation} markers = {this.state.venues} />
+                    </div>
+                    <div className="col-md-6">
+                        <Places venues ={this.state.venues} />
+                    </div>
                 </div>
-                 <div className="row">
-                     <div className="container">
-                         <Autocomplete
-                             style={{width: '90%'}}
-                             onPlaceSelected={(place) => {
-                             place = place;
-                              console.log(place);
-                            }}
-                                             types={[]}
-                                             componentRestrictions={{country: "ca"}}
-                         />
-                     </div>
-                 </div>
-             </div>
+            </div>
         )
     }
 }

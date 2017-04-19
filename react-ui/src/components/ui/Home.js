@@ -1,10 +1,11 @@
-import { NavbarMenu } from './NavbarMenu';
+import {NavbarMenu} from './NavbarMenu';
+let bg_image = require('../images/bgImage.png');
 const style = {
-    backgroundImage: "url(" + require('../images/BgImage.png') +")",
+    backgroundImage: "url(" + bg_image + ")",
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     opacity: 0.9,
-    height: window.innerHeight + 'px'
+    minHeight: window.innerHeight + 'px'
 }
 const Home = () =>
     <div className="row" style={style}>
